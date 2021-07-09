@@ -1,0 +1,38 @@
+.app-splash-screen { 
+    background: #17a2b8;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    transition: left 0.8s;
+}
+.app-splash-screen-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.img-logo {
+    justify-content: center;
+    align-items: center;
+    max-width: 30%;
+    max-height: 30%;
+    margin-left:35%;
+}
+.app-loader {
+    background: url(./../../../assets/img/three-dots.svg);
+    background-repeat: no-repeat;
+    max-width: 100%;
+    background-position: center;
+    background-size: contain;
+    width: 80px;
+    height: 80px;
+    margin-top: 1%;
+}

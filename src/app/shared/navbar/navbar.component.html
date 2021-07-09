@@ -1,0 +1,37 @@
+<mat-toolbar style="z-index: 1;" color="primary">
+  <mat-toolbar-row>
+    <span routerLink="/blog" class="myBlog">
+      <mat-icon id="homeIcon">home</mat-icon>
+      <div id="blog">My-Blog</div>
+    </span>
+    <span class="spacer"></span>
+    <div *ngIf="auth.afAuth.authState | async as user; else showLogin">
+      <span id="userName">
+        <!-- <mat-icon class="userIcon">account_circle</mat-icon> -->
+        <lord-icon
+          src="https://cdn.lordicon.com//dxjqoygy.json"
+          trigger="loop"
+          colors="primary:#FFFFFF,secondary:#FFFFFF"
+          style="width: 40px; height: 40px"
+        >
+        </lord-icon>
+        Hello! {{ user.displayName }}
+      </span>
+      <button mat-raised-button color="accent" routerLink="/dashboard">
+        Write a Post
+        <mat-icon>edit</mat-icon> 
+      </button>
+      <button mat-button routerLink="/blog" (click)="auth.logout()">
+        Logout
+        <mat-icon>logout</mat-icon>
+      </button>
+    </div>
+
+    <ng-template #showLogin>
+      <button mat-button (click)="auth.login()">
+        Login with Google
+        <mat-icon>login</mat-icon>
+      </button>
+    </ng-template>
+  </mat-toolbar-row>
+</mat-toolbar>

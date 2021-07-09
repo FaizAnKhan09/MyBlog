@@ -1,0 +1,32 @@
+<section>
+    <mat-card id="new-mat" *ngFor="let post of posts | async">
+        <mat-card-content routerLink="{{post.id}}">
+            <div style="position: relative;"> 
+            <img class="image-resize" src="{{post.image}}" alt="{{post.title}}"/>
+            <h2 style="position: absolute; top: 17px; left: 20px; color: white; background-color:rgba(0,0,0,0.5); border-radius: 6px; padding: 4px;"
+            >
+            {{post.title}}
+        </h2>
+        </div>
+            <p>Posted by {{post.author}} &bull; {{post.published.toDate()  | date: 'full'}}</p>
+        </mat-card-content>
+        <!-- <button mat-button (click)="openDialog()">View Comments</button> -->
+        <mat-card-actions align="end" *ngIf="auth.currentUserId === post.authorId">
+            <button mat-icon-button color="primary" (click)="delete(post.id)">
+                <mat-icon>delete</mat-icon> 
+            </button> 
+        </mat-card-actions>
+    </mat-card>
+</section>
+<footer style="  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color:#263238;
+  color: white;
+  text-align: center;">
+  <h3 align="end" style="margin-right: 5px; margin-top: 14px;
+  ">
+  © Created by Faizan
+</h3>
+</footer>

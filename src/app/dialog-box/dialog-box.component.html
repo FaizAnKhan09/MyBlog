@@ -1,0 +1,35 @@
+<!-- <div class="box" [hidden]="boxButton">
+  <br />
+  <mat-form-field>
+    <textarea
+      matInput
+      placeholder="Post Comment"
+      [(ngModel)]="content"
+      rows="10"
+    ></textarea>
+  </mat-form-field>
+  <br>
+  <button mat-raised-button color="accent" (click)="createComment()">
+    Post Comment
+  </button>
+</div>
+
+<div [hidden]="!boxButton">
+    <mat-card id="new-mat" *ngFor="let comment of comments | async">
+        <mat-card-content>
+          <h2>
+            {{ comment.author }}
+          </h2>
+          <p>
+            <strong>{{ comment.content }}</strong>
+          </p>
+          <br />
+          <p>{{ comment.published.toDate() | date: "full" }}</p>
+        </mat-card-content>
+      </mat-card>
+      <br>
+      <button *ngIf="auth.afAuth.authState | async as user" mat-raised-button color="accent" (click)="toggleButton()">
+          Add a Comment
+      </button>
+</div> -->
+

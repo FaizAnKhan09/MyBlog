@@ -1,0 +1,135 @@
+<ng-container *ngIf="post">
+  <div style="margin: 0px 100px 0px 100px;">
+  <div style="position: relative" [hidden]="!editing">
+    <mat-card>
+      <h2>Update Post</h2>
+      <mat-form-field>
+        <input matInput placeholder="Post Title" [(ngModel)]="post.title" />
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <textarea
+          matInput
+          placeholder="Post Content"
+          [(ngModel)]="post.content"
+          rows="10"
+        ></textarea>
+      </mat-form-field>
+      <button mat-raised-button color="accent" (click)="updatePost()">
+        Save
+      </button>
+      <button mat-button (click)="editing = false">Cancel</button>
+    </mat-card>
+  </div>
+
+  <div [hidden]="editing">
+    <mat-card style="margin-bottom: 5%;">
+      <img src="{{ post.image }}" alt="{{ post.title }}" />
+      <p>
+        Posted by {{ post.author }} &bull;
+        {{ post.published.toDate() | date: "full" }}
+      </p>
+      <mat-card-content>
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.content }}</p>
+      </mat-card-content>
+      <mat-card-actions
+        align="end"
+        *ngIf="auth.currentUserId === post.authorId"
+      >
+        <button mat-icon-button (click)="editing = true">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="delete()">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+        <button 
+        mat-icon-button 
+        *ngIf="auth.currentUserId !== like.authorId"
+        (click)="createLike()"
+        
+        >
+          <mat-icon>thumb_up</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <div class="box" [hidden]="boxButton">
+      <br />
+      <mat-form-field>
+        <textarea
+          matInput
+          placeholder="Post Comment"
+          [(ngModel)]="content"
+          rows="10"
+        ></textarea>
+      </mat-form-field>
+      <br />
+      <button mat-raised-button color="accent" (click)="createComment()">
+        Post Comment
+      </button>
+    </div>
+    <br />
+    <div style="height: 100vh; float: right; overflow-y: scroll;" [hidden]="!boxButton">
+      <div>
+      <h3>**Comments**</h3>
+      <div *ngFor="let comment of comments | async; let i = index">
+        <mat-card id="new-mat" *ngIf="comment.postId === postId; else noComment">
+          <mat-card-content>
+            <h2>
+              {{ comment.author }}
+            </h2>
+            <p>
+              <strong>{{ comment.content }}</strong>
+            </p>
+            <br />
+            <p>{{ comment.published.toDate() | date: "full" }}</p>
+          </mat-card-content>
+          <mat-card-actions
+            align="end"
+            *ngIf="auth.currentUserId === comment.authorId"
+          >
+            <button mat-icon-button (click)="deleteComment(comment.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+        </div>
+      </div>
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="toggleButton()"
+        *ngIf="auth.afAuth.authState | async as user"
+        style="margin-bottom: 20%;"
+      >
+        Add a Comment
+      </button>
+    </div>
+    <br />
+  </div>
+  </div>
+  <footer
+    style="
+      position:fixed;
+      bottom: 0;
+      /* left: 0;
+      bottom: 0; */
+      /* display: flex; */
+      height: 8%;
+      width: 100%;
+      background-color: #263238;
+      /* padding: 5px 5px 5px 5px; */
+      color: white;
+      text-align:end;
+      /* justify-content: end; */
+      margin-top: 35.2%;
+    "
+  >
+    <h3 style="margin-top: 1%; margin-right: 0.6%;"
+    >
+      © Created by Faizan
+    </h3>
+  </footer>
+</ng-container>

@@ -1,0 +1,8 @@
+export class Comment {
+    id?: string
+    // postId: string
+    author: string
+    authorId: string
+    content: string
+    published: Date
+}
