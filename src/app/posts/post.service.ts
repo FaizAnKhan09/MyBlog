@@ -39,6 +39,7 @@ export class PostService {
 
   create(data: Post){
     this.postsCollection.add(data);
+    console.log(data)
   }
 
   getPost(id:string){
